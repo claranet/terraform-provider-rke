@@ -12,10 +12,10 @@
 name: Test and release
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "claranet" ]
     tags: [ "v*" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "claranet" ]
 
 jobs:
   test:
