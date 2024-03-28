@@ -120,7 +120,7 @@ require (
 	github.com/prometheus/common v0.37.0 // indirect
 	github.com/prometheus/procfs v0.8.0 // indirect
 	github.com/rancher/lasso v0.0.0-20230830164424-d684fdeb6f29 // indirect
-	github.com/rancher/norman v0.0.0-20230831160711-5de27f66385d // indirect
+	github.com/rancher/norman v0.0.0-20240129215925-f4006b7033e8 // indirect
 	github.com/rancher/wrangler v1.1.1-0.20230831050635-df1bd5aae9df // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
