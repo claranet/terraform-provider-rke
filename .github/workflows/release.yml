@@ -24,10 +24,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Set up Go 1.19.7
+      - name: Set up Go 1.20.14
         uses: actions/setup-go@v3
         with:
-          go-version: 1.19.7
+          go-version: 1.20.14
 
       - name: Format
         run: go fmt && git diff --exit-code
@@ -50,4 +50,4 @@ jobs:
       gpg-private-key: '${{ secrets.GPG_PRIVATE_KEY }}'
       gpg-private-key-passphrase: ${{ secrets.PASSPHRASE }}
     with:
-      setup-go-version: '1.19.7'
+      setup-go-version: '1.20.14'
