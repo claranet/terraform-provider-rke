@@ -6,8 +6,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	"k8s.io/apiserver/pkg/apis/apiserver"
 	auditv1 "k8s.io/apiserver/pkg/apis/audit/v1"
-	apiserverconfig "k8s.io/apiserver/pkg/apis/config"
 	eventratelimitapi "k8s.io/kubernetes/plugin/pkg/admission/eventratelimit/apis/eventratelimit"
 )
 
@@ -213,8 +213,8 @@ func rkeClusterServicesKubeAPISecretsEncryptionConfigFields() map[string]*schema
 				if old == "" || new == "" {
 					return false
 				}
-				oldObject := &apiserverconfig.EncryptionConfiguration{}
-				newObject := &apiserverconfig.EncryptionConfiguration{}
+				oldObject := &apiserver.EncryptionConfiguration{}
+				newObject := &apiserver.EncryptionConfiguration{}
 				oldMap, _ := ghodssyamlToMapInterface(old)
 				newMap, _ := ghodssyamlToMapInterface(new)
 				oldStr, _ := mapInterfaceToJSON(oldMap)
@@ -291,14 +291,8 @@ func rkeClusterServicesKubeAPIFields() map[string]*schema.Schema {
 			Type:         schema.TypeString,
 			Optional:     true,
 			Computed:     true,
-			Description:  "Built-in PodSecurityPolicy (privileged or restricted)",
+			Description:  "Pod Security Standards configuration (privileged or restricted)",
 			ValidateFunc: validation.StringInSlice(clusterServicesKubeAPIPodSecurityConfigurationRequired, true),
-		},
-		"pod_security_policy": {
-			Type:        schema.TypeBool,
-			Optional:    true,
-			Computed:    true,
-			Description: "Enabled/Disable PodSecurityPolicy",
 		},
 		"secrets_encryption_config": {
 			Type:     schema.TypeList,

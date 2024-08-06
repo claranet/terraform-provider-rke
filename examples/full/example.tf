@@ -160,8 +160,6 @@ EOL
       # Expose a different port range for NodePort services
       service_node_port_range = "30000-32767"
 
-      pod_security_policy = false
-
       # Add additional arguments to the kubernetes API server
       # This WILL OVERRIDE any existing defaults
       extra_args = {

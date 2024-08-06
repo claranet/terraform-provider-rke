@@ -1,3 +1,15 @@
+### 1.6.0 (August 6, 2024)
+
+FEATURES:
+* **Removed configuration:** `pod_security_policy` - See [Removed from RKE 1.6.x](https://github.com/rancher/rke/commit/3da43654851ebea547155ec9daacc3eed4c06ab1)
+
+ENHANCEMENTS:
+
+* bump Go to 1.22, k8s libs to 0.30.1 and RKE to v1.6.0 to support k8s up to 1.30. See [RKE 1.6.x pull request](https://github.com/rancher/rke/pull/3608)
+
+BUG FIXES:
+
+
 ### 1.5.0 (April 8, 2024)
 
 FEATURES:

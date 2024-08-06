@@ -8,7 +8,7 @@ import (
 	rancher "github.com/rancher/rke/types"
 	log "github.com/sirupsen/logrus"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	apiserverconfigv1 "k8s.io/apiserver/pkg/apis/config/v1"
+	apiserverv1 "k8s.io/apiserver/pkg/apis/apiserver/v1"
 )
 
 // Flatteners
@@ -423,7 +423,7 @@ func patchRKEClusterYaml(in *rancher.RancherKubernetesEngineConfig) (string, err
 		if err != nil {
 			return "", fmt.Errorf("marshalling custom_config yaml: %v", err)
 		}
-		customConfigV1 := &apiserverconfigv1.EncryptionConfiguration{
+		customConfigV1 := &apiserverv1.EncryptionConfiguration{
 			TypeMeta: metav1.TypeMeta{
 				Kind:       clusterServicesKubeAPISecretsEncryptionConfigKindDefault,
 				APIVersion: clusterServicesKubeAPISecretsEncryptionConfigAPIDefault,

@@ -6,8 +6,8 @@ import (
 
 	rancher "github.com/rancher/rke/types"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	apiserverv1 "k8s.io/apiserver/pkg/apis/apiserver/v1"
 	auditv1 "k8s.io/apiserver/pkg/apis/audit/v1"
-	apiserverconfigv1 "k8s.io/apiserver/pkg/apis/config/v1"
 	eventratelimitapi "k8s.io/kubernetes/plugin/pkg/admission/eventratelimit/apis/eventratelimit"
 )
 
@@ -93,21 +93,21 @@ func init() {
 	}
 	testRKEClusterServicesKubeAPISecretsEncryptionConfigConf = &rancher.SecretsEncryptionConfig{
 		Enabled: true,
-		CustomConfig: &apiserverconfigv1.EncryptionConfiguration{
-			Resources: []apiserverconfigv1.ResourceConfiguration{
+		CustomConfig: &apiserverv1.EncryptionConfiguration{
+			Resources: []apiserverv1.ResourceConfiguration{
 				{
 					Resources: []string{"secrets"},
-					Providers: []apiserverconfigv1.ProviderConfiguration{
+					Providers: []apiserverv1.ProviderConfiguration{
 						{
-							AESCBC: &apiserverconfigv1.AESConfiguration{
-								Keys: []apiserverconfigv1.Key{
+							AESCBC: &apiserverv1.AESConfiguration{
+								Keys: []apiserverv1.Key{
 									{
 										Name:   "k-fw5hn",
 										Secret: "RTczRjFDODMwQzAyMDVBREU4NDJBMUZFNDhCNzM5N0I=",
 									},
 								},
 							},
-							Identity: &apiserverconfigv1.IdentityConfiguration{},
+							Identity: &apiserverv1.IdentityConfiguration{},
 						},
 					},
 				},
@@ -128,7 +128,6 @@ func init() {
 		AlwaysPullImages:        true,
 		AuditLog:                testRKEClusterServicesKubeAPIAuditLogConf,
 		EventRateLimit:          testRKEClusterServicesKubeAPIEventRateLimitConf,
-		PodSecurityPolicy:       true,
 		SecretsEncryptionConfig: testRKEClusterServicesKubeAPISecretsEncryptionConfigConf,
 		ServiceClusterIPRange:   "10.43.0.0/16",
 		ServiceNodePortRange:    "30000-32000",
@@ -152,7 +151,6 @@ func init() {
 			"extra_binds":               []interface{}{"bind_one", "bind_two"},
 			"extra_env":                 []interface{}{"env_one", "env_two"},
 			"image":                     "image",
-			"pod_security_policy":       true,
 			"secrets_encryption_config": testRKEClusterServicesKubeAPISecretsEncryptionConfigInterface,
 			"service_cluster_ip_range":  "10.43.0.0/16",
 			"service_node_port_range":   "30000-32000",
@@ -255,8 +253,8 @@ func TestFlattenRKEClusterServicesKubeAPISecretsEncryptionConfig(t *testing.T) {
 		if err != nil {
 			t.Fatalf("Error on flattenRKEClusterServicesKubeAPISecretsEncryptionConfig: %#v", err)
 		}
-		outputObject := &apiserverconfigv1.EncryptionConfiguration{}
-		expectedObject := &apiserverconfigv1.EncryptionConfiguration{}
+		outputObject := &apiserverv1.EncryptionConfiguration{}
+		expectedObject := &apiserverv1.EncryptionConfiguration{}
 		outputStr, _ := mapInterfaceToJSON(output[0].(map[string]interface{}))
 		expectedStr, _ := mapInterfaceToJSON(tc.ExpectedOutput[0].(map[string]interface{}))
 		jsonToInterface(outputStr, outputObject)
